@@ -50,7 +50,7 @@ const SIDEBAR_KEY = 'shell_sidebar_collapsed';
   imports: [
     RouterOutlet,
     RouterLink,
-    RouterLinkActive,
+    //RouterLinkActive,
     MatSidenavModule,
     MatToolbarModule,
     MatListModule,
@@ -91,33 +91,53 @@ export class MainLayoutComponent
     localStorage.getItem(SIDEBAR_KEY) === '1',
   );
 
-  readonly nav = [
-    {
-      path: 'empleados',
-      label: 'Empleados',
-      icon: 'people'
-    },
-    {
-      path: 'clientes',
-      label: 'Clientes',
-      icon: 'groups'
-    },
-    {
-      path: 'productos',
-      label: 'Productos',
-      icon: 'inventory_2'
-    },
-    {
-      path: 'compras',
-      label: 'Compras',
-      icon: 'shopping_cart'
-    },
-    {
-      path: 'pagos',
-      label: 'Pagos',
-      icon: 'payments'
-    }
-  ];
+readonly nav = [
+  {
+    path: 'empleados',
+    label: 'Empleados',
+    icon: 'badge'
+  },
+  {
+    path: 'clientes',
+    label: 'Clientes',
+    icon: 'groups'
+  },
+  {
+    path: 'productos',
+    label: 'Productos',
+    icon: 'inventory_2'
+  },
+  {
+    path: 'categorias',
+    label: 'Categorías',
+    icon: 'category'
+  },
+  {
+    path: 'proveedores',
+    label: 'Proveedores',
+    icon: 'local_shipping'
+  },
+  {
+    path: 'compras',
+    label: 'Compras',
+    icon: 'shopping_cart'
+  },
+  {
+    path: 'pagos',
+    label: 'Pagos',
+    icon: 'payments'
+  },
+  {
+    path: 'cajas',
+    label: 'Cajas',
+    icon: 'point_of_sale'
+  },
+  {
+    path: 'jornadas',
+    label: 'Jornadas',
+    icon: 'schedule'
+  }
+];
 
   ngOnInit(): void {
 
@@ -173,7 +193,7 @@ export class MainLayoutComponent
   }
 
   onEmpleadoAudit(id: string): void {
-    this.audit.select(id);
+    this.audit.select(id, this.empleados().find(e => e.id === id)?.documento || '');
   }
 
   logout(): void {

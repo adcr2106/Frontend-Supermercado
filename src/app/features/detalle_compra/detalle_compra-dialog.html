@@ -1,0 +1,101 @@
+<h2 mat-dialog-title>
+
+  {{ data.mode === 'create'
+      ? 'Agregar Producto'
+      : 'Editar Producto' }}
+
+</h2>
+
+<mat-dialog-content>
+
+  <form [formGroup]="form">
+
+    <!-- PRODUCTO -->
+
+    <mat-form-field
+      appearance="outline"
+      class="w-100">
+
+      <mat-label>Producto</mat-label>
+
+      <input
+        type="text"
+        matInput
+        [formControl]="productoControl"
+        [matAutocomplete]="auto">
+
+      <mat-autocomplete
+        #auto="matAutocomplete"
+        [displayWith]="displayProducto"
+        (optionSelected)="seleccionarProducto($event.option.value)">
+
+        <mat-option
+          *ngFor="let p of productosFiltrados"
+          [value]="p">
+
+          {{ p.nombre }}
+          -
+          ${{ p.precio }}
+
+        </mat-option>
+
+      </mat-autocomplete>
+
+    </mat-form-field>
+
+    <!-- CANTIDAD -->
+
+    <mat-form-field
+      appearance="outline"
+      class="w-100">
+
+      <mat-label>Cantidad</mat-label>
+
+      <input
+        type="number"
+        matInput
+        formControlName="cantidad"
+        (input)="actualizarSubtotal()">
+
+    </mat-form-field>
+
+    <!-- SUBTOTAL -->
+
+    <mat-form-field
+      appearance="outline"
+      class="w-100">
+
+      <mat-label>Subtotal</mat-label>
+
+      <input
+        type="number"
+        matInput
+        formControlName="subtotal"
+        readonly>
+
+    </mat-form-field>
+
+  </form>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+
+  <button
+    mat-button
+    (click)="cancel()">
+
+    Cancelar
+
+  </button>
+
+  <button
+    mat-flat-button
+    color="primary"
+    (click)="save()">
+
+    Guardar
+
+  </button>
+
+</mat-dialog-actions>

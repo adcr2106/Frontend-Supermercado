@@ -1,18 +1,41 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, inject, OnInit, signal } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+
+import {
+  Component,
+  inject,
+  OnInit,
+  signal
+} from '@angular/core';
+
+import {
+  FormBuilder,
+  ReactiveFormsModule,
+  Validators
+} from '@angular/forms';
+
 import { Router } from '@angular/router';
 
 import { MatButtonModule } from '@angular/material/button';
+
 import { MatCardModule } from '@angular/material/card';
+
 import { MatFormFieldModule } from '@angular/material/form-field';
+
 import { MatInputModule } from '@angular/material/input';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
-import { AuditContextService } from '../../core/audit-context.service';
+import { MatProgressSpinnerModule }
+from '@angular/material/progress-spinner';
 
-import { EmpleadoService } from '../../core/services/empleado.service';
+import {
+  MatSnackBar,
+  MatSnackBarModule
+} from '@angular/material/snack-bar';
+
+import { AuditContextService }
+from '../../core/audit-context.service';
+
+import { EmpleadoService }
+from '../../core/services/empleado.service';
 
 import {
   EmpleadoCreate,
@@ -22,6 +45,9 @@ import {
 
 @Component({
   selector: 'app-login',
+
+  standalone: true,
+
   imports: [
     ReactiveFormsModule,
     MatCardModule,
@@ -31,12 +57,16 @@ import {
     MatProgressSpinnerModule,
     MatSnackBarModule,
   ],
+
   templateUrl: './login.html',
+
   styleUrl: './login.scss',
 })
+
 export class LoginComponent implements OnInit {
 
-  private readonly fb = inject(FormBuilder);
+  private readonly fb =
+    inject(FormBuilder);
 
   private readonly empleadoService =
     inject(EmpleadoService);
@@ -68,6 +98,7 @@ export class LoginComponent implements OnInit {
         '',
         Validators.required
       ],
+
     });
 
   readonly firstEmpleadoForm =
@@ -107,36 +138,51 @@ export class LoginComponent implements OnInit {
         '',
         Validators.email
       ],
+
     });
 
   ngOnInit(): void {
+
     this.reload();
+
   }
 
   reload(): void {
 
     this.loading.set(true);
 
-    this.empleadoService.list().subscribe({
+    this.empleadoService
+      .list()
+      .subscribe({
 
-      next: (rows) => {
+        next: (rows) => {
 
-        this.empleados.set(rows);
+          this.empleados.set(rows);
 
-        this.loading.set(false);
-      },
+          this.loading.set(false);
 
-      error: (err: HttpErrorResponse) => {
+        },
 
-        this.loading.set(false);
+        error: (err: HttpErrorResponse) => {
 
-        this.snack.open(
-          this.msg(err),
-          'Cerrar',
-          { duration: 6000 }
-        );
-      },
-    });
+          this.loading.set(false);
+
+          this.snack.open(
+
+            this.msg(err),
+
+            'Cerrar',
+
+            {
+              duration: 6000
+            }
+
+          );
+
+        },
+
+      });
+
   }
 
   ingresar(): void {
@@ -146,9 +192,11 @@ export class LoginComponent implements OnInit {
       this.loginForm.markAllAsTouched();
 
       return;
+
     }
 
     const body: EmpleadoLogin =
+
       this.loginForm.getRawValue();
 
     this.empleadoService
@@ -157,24 +205,39 @@ export class LoginComponent implements OnInit {
 
         next: (empleado) => {
 
+          // GUARDAR ID Y DOCUMENTO
           this.audit.select(
-            empleado.id
+
+            empleado.id,
+
+            empleado.documento
+
           );
 
           void this.router.navigateByUrl(
             '/app'
           );
+
         },
 
         error: (err: HttpErrorResponse) => {
 
           this.snack.open(
+
             this.msg(err),
+
             'Cerrar',
-            { duration: 5000 }
+
+            {
+              duration: 5000
+            }
+
           );
+
         },
+
       });
+
   }
 
   crearPrimero(): void {
@@ -184,6 +247,7 @@ export class LoginComponent implements OnInit {
       this.firstEmpleadoForm.markAllAsTouched();
 
       return;
+
     }
 
     const v =
@@ -206,6 +270,7 @@ export class LoginComponent implements OnInit {
       correo: v.correo || null,
 
       creado_por: 'sistema',
+
     };
 
     this.empleadoService
@@ -215,51 +280,79 @@ export class LoginComponent implements OnInit {
         next: (created) => {
 
           this.empleados.set([
+
             ...this.empleados(),
+
             created
+
           ]);
 
+          // GUARDAR ID Y DOCUMENTO
           this.audit.select(
-            created.id
+
+            created.id,
+
+            created.documento
+
           );
 
           void this.router.navigateByUrl(
             '/app'
           );
+
         },
 
         error: (err: HttpErrorResponse) => {
 
           this.snack.open(
+
             this.msg(err),
+
             'Cerrar',
-            { duration: 6000 }
+
+            {
+              duration: 6000
+            }
+
           );
+
         },
+
       });
+
   }
 
   private msg(
     err: HttpErrorResponse
   ): string {
 
-    const d = err.error?.detail;
+    const d =
+      err.error?.detail;
 
     if (typeof d === 'string') {
+
       return d;
+
     }
 
     if (Array.isArray(d)) {
 
       return d
         .map(
+
           (x) =>
+
             x.msg ??
+
             JSON.stringify(x)
+
         )
         .join('; ');
+
     }
 
     return err.message;
+
   }
+
 }

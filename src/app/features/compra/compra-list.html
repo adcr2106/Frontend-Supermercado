@@ -1,0 +1,175 @@
+<div class="container">
+
+  <div class="header">
+
+    <h2>Compras</h2>
+
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="abrirDialog()">
+
+      Nueva Compra
+
+    </button>
+
+  </div>
+
+  <table
+    mat-table
+    [dataSource]="compras"
+    class="mat-elevation-z8">
+
+    <!-- ID -->
+    <ng-container matColumnDef="id">
+
+      <th mat-header-cell *matHeaderCellDef>
+        ID
+      </th>
+
+      <td mat-cell *matCellDef="let element">
+
+        {{ element.id }}
+
+      </td>
+
+    </ng-container>
+
+    <!-- Cliente -->
+    <ng-container matColumnDef="doc_cliente">
+
+      <th mat-header-cell *matHeaderCellDef>
+        Cliente
+      </th>
+
+      <td mat-cell *matCellDef="let element">
+
+        {{ element.doc_cliente }}
+
+      </td>
+
+    </ng-container>
+
+    <!-- Empleado -->
+    <ng-container matColumnDef="doc_empleado">
+
+      <th mat-header-cell *matHeaderCellDef>
+        Empleado
+      </th>
+
+      <td mat-cell *matCellDef="let element">
+
+        {{ element.doc_empleado }}
+
+      </td>
+
+    </ng-container>
+
+    <!-- Total -->
+    <ng-container matColumnDef="total">
+
+      <th mat-header-cell *matHeaderCellDef>
+        Total
+      </th>
+
+      <td mat-cell *matCellDef="let element">
+
+        {{ element.total | currency }}
+
+      </td>
+
+    </ng-container>
+
+    <!-- Fecha -->
+    <ng-container matColumnDef="fecha_hora">
+
+      <th mat-header-cell *matHeaderCellDef>
+        Fecha
+      </th>
+
+      <td mat-cell *matCellDef="let element">
+
+        {{ element.fecha_hora | date:'short' }}
+
+      </td>
+
+    </ng-container>
+
+    <!-- Estado -->
+    <ng-container matColumnDef="activo">
+
+      <th mat-header-cell *matHeaderCellDef>
+        Estado
+      </th>
+
+      <td mat-cell *matCellDef="let element">
+
+        {{ element.activo ? 'Activo' : 'Inactivo' }}
+
+      </td>
+
+    </ng-container>
+
+    <!-- Acciones -->
+    <ng-container matColumnDef="acciones">
+
+      <th mat-header-cell *matHeaderCellDef>
+        Acciones
+      </th>
+
+      <td mat-cell *matCellDef="let element">
+
+        <!-- Editar -->
+        <button
+          mat-icon-button
+          color="primary"
+          (click)="abrirDialog(element)">
+
+          <mat-icon>
+            edit
+          </mat-icon>
+
+        </button>
+
+        <!-- Eliminar -->
+        <button
+          mat-icon-button
+          color="warn"
+          (click)="eliminarCompra(element.id)">
+
+          <mat-icon>
+            delete
+          </mat-icon>
+
+        </button>
+
+        <!-- Activar -->
+        <button
+          *ngIf="!element.activo"
+          mat-icon-button
+          color="accent"
+          (click)="activarCompra(element.id)">
+
+          <mat-icon>
+            check_circle
+          </mat-icon>
+
+        </button>
+
+      </td>
+
+    </ng-container>
+
+    <tr
+      mat-header-row
+      *matHeaderRowDef="displayedColumns">
+    </tr>
+
+    <tr
+      mat-row
+      *matRowDef="let row; columns: displayedColumns;">
+    </tr>
+
+  </table>
+
+</div>
