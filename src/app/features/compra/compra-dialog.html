@@ -1,0 +1,84 @@
+<h2 mat-dialog-title>
+
+  {{ data ? 'Editar Compra' : 'Nueva Compra' }}
+
+</h2>
+
+<mat-dialog-content>
+
+  <form [formGroup]="form">
+
+    <!-- CLIENTE -->
+    <mat-form-field
+      appearance="outline"
+      class="w-100">
+
+      <mat-label>Documento Cliente</mat-label>
+
+      <input
+        matInput
+        formControlName="doc_cliente">
+
+      <mat-error
+        *ngIf="form.controls['doc_cliente'].hasError('required')">
+
+        El documento del cliente es obligatorio
+
+      </mat-error>
+
+    </mat-form-field>
+
+    <!-- EMPLEADO -->
+    <mat-form-field
+      appearance="outline"
+      class="w-100">
+
+      <mat-label>Empleado en sesión</mat-label>
+
+      <input
+        matInput
+        formControlName="doc_empleado"
+        readonly>
+
+    </mat-form-field>
+
+    <!-- TOTAL -->
+    <mat-form-field
+      appearance="outline"
+      class="w-100">
+
+      <mat-label>Total</mat-label>
+
+      <input
+        matInput
+        formControlName="total"
+        readonly>
+
+    </mat-form-field>
+
+  </form>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+
+  <button
+    mat-button
+    type="button"
+    (click)="cerrar()">
+
+    Cancelar
+
+  </button>
+
+  <button
+    mat-raised-button
+    color="primary"
+    type="button"
+    (click)="guardar()">
+
+    {{ data ? 'Actualizar' : 'Crear Compra' }}
+
+  </button>
+
+</mat-dialog-actions>
