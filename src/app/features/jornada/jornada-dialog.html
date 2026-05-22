@@ -1,0 +1,93 @@
+<h2 mat-dialog-title>
+
+  Nueva Jornada
+
+</h2>
+
+<mat-dialog-content>
+
+  <form [formGroup]="form">
+
+    <!-- EMPLEADO -->
+    <mat-form-field
+      appearance="outline"
+      class="w-100">
+
+      <mat-label>Empleado</mat-label>
+
+      <mat-select formControlName="id_empleado">
+
+        <mat-option
+          *ngFor="let empleado of empleados"
+          [value]="empleado.id">
+
+          {{ empleado.nombre }}
+
+        </mat-option>
+
+      </mat-select>
+
+      <mat-error
+        *ngIf="form.controls['id_empleado'].hasError('required')">
+
+        El empleado es obligatorio
+
+      </mat-error>
+
+    </mat-form-field>
+
+    <!-- CAJA -->
+    <mat-form-field
+      appearance="outline"
+      class="w-100">
+
+      <mat-label>Caja Registradora</mat-label>
+
+      <mat-select formControlName="id_caja">
+
+        <mat-option
+          *ngFor="let caja of cajas"
+          [value]="caja.id">
+
+          {{ caja.id }}
+
+        </mat-option>
+
+      </mat-select>
+
+      <mat-error
+        *ngIf="form.controls['id_caja'].hasError('required')">
+
+        La caja registradora es obligatoria
+
+      </mat-error>
+
+    </mat-form-field>
+
+  </form>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+
+  <button
+    mat-button
+    type="button"
+    (click)="cerrar()">
+
+    Cancelar
+
+  </button>
+
+  <button
+    mat-flat-button
+    color="primary"
+    type="button"
+    (click)="guardar()"
+    [disabled]="form.invalid">
+
+    Crear Jornada
+
+  </button>
+
+</mat-dialog-actions>

@@ -1,0 +1,191 @@
+<h2 mat-dialog-title>
+
+  {{ data.mode === 'create'
+      ? 'Nuevo Empleado'
+      : 'Editar Empleado' }}
+
+</h2>
+
+<mat-dialog-content>
+
+  <form [formGroup]="form">
+
+    <!-- Documento -->
+    <mat-form-field
+      appearance="outline"
+      class="w-100">
+
+      <mat-label>
+        Documento
+      </mat-label>
+
+      <input
+        matInput
+        formControlName="documento"
+        placeholder="Ingrese el documento" />
+
+      <mat-error
+        *ngIf="form.controls.documento.hasError('required')">
+
+        El documento es obligatorio
+
+      </mat-error>
+
+    </mat-form-field>
+
+    <!-- Nombre -->
+    <mat-form-field
+      appearance="outline"
+      class="w-100">
+
+      <mat-label>
+        Nombre
+      </mat-label>
+
+      <input
+        matInput
+        formControlName="nombre"
+        placeholder="Ingrese el nombre" />
+
+      <mat-error
+        *ngIf="form.controls.nombre.hasError('required')">
+
+        El nombre es obligatorio
+
+      </mat-error>
+
+    </mat-form-field>
+
+    <!-- Salario -->
+    <mat-form-field
+      appearance="outline"
+      class="w-100">
+
+      <mat-label>
+        Salario
+      </mat-label>
+
+      <input
+        matInput
+        type="number"
+        formControlName="salario"
+        placeholder="Ingrese el salario" />
+
+      <mat-error
+        *ngIf="form.controls.salario.hasError('required')">
+
+        El salario es obligatorio
+
+      </mat-error>
+
+    </mat-form-field>
+
+    <!-- Cargo -->
+    <mat-form-field
+      appearance="outline"
+      class="w-100">
+
+      <mat-label>
+        Cargo
+      </mat-label>
+
+      <input
+        matInput
+        formControlName="cargo"
+        placeholder="Ingrese el cargo" />
+
+      <mat-error
+        *ngIf="form.controls.cargo.hasError('required')">
+
+        El cargo es obligatorio
+
+      </mat-error>
+
+    </mat-form-field>
+
+    <!-- Contraseña -->
+    <mat-form-field
+      appearance="outline"
+      class="w-100">
+
+      <mat-label>
+        Contraseña
+      </mat-label>
+
+      <input
+        matInput
+        type="password"
+        formControlName="contrasena"
+        placeholder="Ingrese la contraseña" />
+
+      <mat-error
+        *ngIf="form.controls.contrasena.hasError('required')">
+
+        La contraseña es obligatoria
+
+      </mat-error>
+
+    </mat-form-field>
+
+    <!-- Teléfono -->
+    <mat-form-field
+      appearance="outline"
+      class="w-100">
+
+      <mat-label>
+        Teléfono
+      </mat-label>
+
+      <input
+        matInput
+        formControlName="telefono"
+        placeholder="Ingrese el teléfono" />
+
+    </mat-form-field>
+
+    <!-- Correo -->
+    <mat-form-field
+      appearance="outline"
+      class="w-100">
+
+      <mat-label>
+        Correo
+      </mat-label>
+
+      <input
+        matInput
+        type="email"
+        formControlName="correo"
+        placeholder="Ingrese el correo" />
+
+    </mat-form-field>
+
+  </form>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+
+  <button
+    mat-button
+    type="button"
+    (click)="cancel()">
+
+    Cancelar
+
+  </button>
+
+  <button
+    mat-flat-button
+    color="primary"
+    type="button"
+    (click)="save()"
+    [disabled]="form.invalid">
+
+    {{ data.mode === 'create'
+        ? 'Crear'
+        : 'Actualizar' }}
+
+  </button>
+
+</mat-dialog-actions>
