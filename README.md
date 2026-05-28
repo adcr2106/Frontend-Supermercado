@@ -1,4 +1,8 @@
-## Demo del proyecto
+# Integrantes:
+* Andres Chavarria
+* Maikol Acevedo
+
+# Demo del proyecto
 
 *Frontend desplegado en Firebase*
 
