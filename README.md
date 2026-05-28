@@ -1,3 +1,19 @@
+## Demo del proyecto
+
+*Frontend desplegado en Firebase*
+
+🌐 https://supermercado-7faf4.web.app/login
+
+*Backend desplegado en Render*
+
+🌐 https://backend-supermercado-zcrx.onrender.com/docs
+
+*Video demostrativo*
+
+🎥 https://drive.google.com/file/d/1AakUIa4fOc2fbBPXvXnAORLB5CaOYF8x/view?usp=drive_link
+
+--------------
+
 # Supermercado App
 
 Sistema web para la gestión integral de un supermercado, desarrollado con **Angular** para el frontend y **FastAPI** para el backend.
