@@ -4,6 +4,10 @@
 
 🌐 https://supermercado-7faf4.web.app/login
 
+    Credenciales para iniciar sesion:
+    Dcoumento: 1
+    Contraseña: 1
+
 *Backend desplegado en Render*
 
 🌐 https://backend-supermercado-zcrx.onrender.com/docs
